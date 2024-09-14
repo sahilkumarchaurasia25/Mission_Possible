@@ -1,0 +1,33 @@
+{
+  "name": "hackathon-project-colosal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aedes": "^0.51.3",
+    "aedes-packet": "^3.0.0",
+    "aedes-persistence": "^9.1.2",
+    "aedes-server-factory": "^0.2.1",
+    "azure-iot-device": "^1.18.3",
+    "azure-iot-device-mqtt": "^1.16.3",
+    "azure-iothub": "^1.16.5",
+    "express": "^4.20.0",
+    "express-status-monitor": "^1.3.4",
+    "ffmpeg": "^0.0.4",
+    "firebase": "^10.13.1",
+    "firebase-admin": "^12.5.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "jsonschema": "^1.4.1",
+    "mosca": "^2.8.3",
+    "node-rtsp-stream": "^0.0.9",
+    "rtsp-stream": "^1.0.0",
+    "rtsp-streaming-server": "^2.1.0",
+    "ws": "^8.18.0"
+  }
+}

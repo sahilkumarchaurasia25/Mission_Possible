@@ -1,0 +1,163 @@
+import 'package:flutter/material.dart';
+import 'package:drivers_app/globals.dart';
+
+class DriverDetails extends StatelessWidget {
+  const DriverDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome ${trimToFirstName(driverUser.name)}',
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            SummaryRow(label: 'Total Rides', value: driverUser.total_ride),
+            SummaryRow(
+                label: 'Students Dropped',
+                value: driverUser.total_students_dropped),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String trimToFirstName(String fullName) {
+    if (fullName.contains(" ")) {
+      return fullName.split(" ").first;
+    } else {
+      return fullName; // If no space, return the full name
+    }
+  }
+}
+
+class SummaryRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool isBold;
+
+  const SummaryRow(
+      {super.key,
+      required this.label,
+      required this.value,
+      this.isBold = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TodaysRide extends StatelessWidget {
+  TodaysRide({super.key});
+
+  List<String> names = [
+    'Naya Shannon',
+    'Eliel Lawson',
+    'Phoebe Calhoun',
+    'Gary McFarland',
+    'Annika Hayes',
+    'Legend Jefferson',
+    'Julieta Quinn',
+    'Rhys Sanford',
+    'Emerald Glass',
+    'Allan Miles'
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Today\'s Ride',
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            ),
+            const SummaryRow(label: 'Vehicle Number', value: 'KA05BT6576'),
+            const SummaryRow(label: 'Pickup Location', value: 'AIT'),
+            const SummaryRow(
+              label: 'Students List',
+              value: '',
+              isBold: true,
+            ),
+            const Divider(),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: names.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return StudentTable(
+                  serialNumber: index,
+                  name: names[index],
+                  profile: names[index],
+                  dropLocation: names[index],
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StudentTable extends StatelessWidget {
+  final int serialNumber;
+  final String name;
+  final String profile;
+  final String dropLocation;
+
+  const StudentTable(
+      {super.key,
+      required this.serialNumber,
+      required this.name,
+      required this.profile,
+      required this.dropLocation});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            (serialNumber + 1).toString(),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          ),
+          Text(
+            name,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          ),
+          Image.network("https://i.pravatar.cc/25"),
+          const Icon(Icons.location_on)
+        ],
+      ),
+    );
+  }
+}
